@@ -61,12 +61,12 @@ class 360LearningClient extends 360LearningClientBase {
     /**
      * Get information about a given group.
      * Returns : 
-        _id: group’s id    
-        name: group’s name    
-        public: group’s privacy    
-        users: array of the learners of the group    
-        coaches : array of the coaches of the group    
-        custom : group's additionnal info
+     *  _id: group’s id    
+     *  name: group’s name    
+     *  public: group’s privacy    
+     *  users: array of the learners of the group    
+     *  coaches : array of the coaches of the group    
+     *  custom : group's additionnal info
      */
     function getGroup($groupID = NULL) {
         return new DynamicResponseModel($this->processRestRequest('GET', '/groups/$groupID'));
@@ -76,8 +76,8 @@ class 360LearningClient extends 360LearningClientBase {
      * Delete a group.
      *
      * Returns : 
-        - In case of success, an empty response code 204 (No Content) in accordance with RFC 7231.
-        - In case of error, an error code.
+     *  - In case of success, an empty response code 204 (No Content) in accordance with RFC 7231.
+     *  - In case of error, an error code.
      */
     function deleteGroup($groupID = NULL) {
         return new DynamicResponseModel($this->processRestRequest('DELETE', '/groups/$groupID'));
@@ -94,8 +94,8 @@ class 360LearningClient extends 360LearningClientBase {
      * Remove a user from a given group.
      *
      * Returns :
-        - In case of success, an empty response code 204 (No Content) in accordance with RFC 7231.
-        - In case of error, an error code.
+     *  - In case of success, an empty response code 204 (No Content) in accordance with RFC 7231.
+     *  - In case of error, an error code.
      */
     function deleteUserFromGroup($groupID = NULL, $userEmail = NULL) {
         return new DynamicResponseModel($this->processRestRequest('DELETE', '/groups/$groupID/users/$userEmail'));
@@ -105,8 +105,8 @@ class 360LearningClient extends 360LearningClientBase {
      * Create a group.
      *
      * Returns :
-        - A status code (group_created, missing argument : {name/public}, invalid argument : {name/public})
-        - The group's id if successful
+     *  - A status code (group_created, missing argument : {name/public}, invalid argument : {name/public})
+     *  - The group's id if successful
      */
     function createGroup() {
         return new DynamicResponseModel($this->processRestRequest('POST', '/groups'));
@@ -120,7 +120,7 @@ class 360LearningClient extends 360LearningClientBase {
      * @param string custom : A new custom info - group's additionnal information (optionnal)
      * 
      * Returns :
-        A status code (group_updated, invalid argument : {name/public}) 
+     *  A status code (group_updated, invalid argument : {name/public}) 
      */
     function updateGroup($groupID = NULL, $name = NULL, $public = NULL, $custom = NULL) {
         $body = array();
@@ -145,22 +145,90 @@ class 360LearningClient extends 360LearningClientBase {
       
     /**********************************************************************************************************************************
      * Programs
-     */
+     */    
     
-    GET
-    getPrograms
-    GET
-    getProgram
-    PUT
-    addGroupToProgram
-    PUT
-    addUserToProgram
-    DEL
-    deleteUserFromProgram
-    DEL
-    deleteGroupFromProgram
-    GET
-    getUserProgramStats
+    /**
+     * Retrieve the list of all your programs.
+     * Returns: An array of programs (_id, name, author, referents, startDate, endDate, programDuration, modules, users)
+     *      _id : program id
+     *      name: program name
+     *      author: program author’s mail
+     *      tutors: array of the referents’ mails
+     *      startDate: program start date
+     *      endDate: program end date
+     *      programDuration: estimated duration of the program
+     *      modules: array of the program modules. A module can be a course, a webinar or a classroom.
+     *      users: array of the users enrolled in the program
+     */
+    function getPrograms() {
+        return new DynamicResponseModel($this->processRestRequest('GET', '/programs'));
+    }      
+    
+    /**
+     * Get information about a given program.
+     * Returns: An array of programs (_id, name, author, referents, startDate, endDate, programDuration, modules, users)
+     *      _id : program id
+     *      name: program name
+     *      author: program author’s mail
+     *      tutors: array of the referents’ mails
+     *      startDate: program start date
+     *      endDate: program end date
+     *      programDuration: estimated duration of the program
+     *      modules: array of the program modules. A module can be a course, a webinar or a classroom.
+     *      users: array of the users enrolled in the program
+     */
+    function getProgram($programID) {
+        return new DynamicResponseModel($this->processRestRequest('GET', '/programs/$programID'));
+    }     
+    
+    /**
+     * Invite a group to a given program.    
+     */
+    function addGroupToProgram($programID, $groupID) {
+        return new DynamicResponseModel($this->processRestRequest('PUT', '/programs/$programID/groups/$groupID'));
+    }
+    
+    /**
+     * Invite a user to a given program.
+     */
+    function addUserToProgram($programID, $userEmail) {
+        return new DynamicResponseModel($this->processRestRequest('PUT', '/programs/$programID/users/$userEmail'));
+    }
+  
+    /**
+     * Uninvite a user from a given program.
+     * Returns :
+     *    In case of success, an empty response code 204 (No Content) in accordance with RFC 7231.
+     *    In case of error, an error code.
+     */
+    function deleteUserFromProgram($programID, $userEmail) {
+        return new DynamicResponseModel($this->processRestRequest('DEL', '/programs/$programID/users/$userEmail'));
+    }
+    
+    /**
+     * Uninvite a group from a given program.
+     * Returns :
+     *    In case of success, an empty response code 204 (No Content) in accordance with RFC 7231.
+     *    In case of error, an error code.
+     */
+    function deleteGroupFromProgram($programID, $groupID) {
+        return new DynamicResponseModel($this->processRestRequest('DEL', '/programs/$programID/groups/$$groupID'));
+    }    
+   
+    /**
+     * Retrieve the statistics of a user for a given program.
+     * Returns:
+     *    globalTime: total time spent by the user following the given program (milliseconds)
+     *    progress: the learner’s progress status (%)
+     *    score: the global score obtained by the user in the program (%)
+     */
+    function getUserProgramStats($programID, $userEmail) {
+        return new DynamicResponseModel($this->processRestRequest('GET', '/programs/$programID/stats/$userEmail'));
+    }     
+    
+    
+    
+        
     
     /**********************************************************************************************************************************
      * Users
