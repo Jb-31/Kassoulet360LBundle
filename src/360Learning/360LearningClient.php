@@ -41,7 +41,7 @@ class 360LearningClient extends 360LearningClientBase {
      * Retrieve the statistics of a user for a given course.
      * Returns : An array of the user’s statistics by attempt (globalTime, progress, score, completedAt)     
      */
-    function getUserCourseStats($courseID = NULL, $userEmail = NULL) {        
+    function getUserCourseStats($courseID, $userEmail) {        
         return new DynamicResponseModel($this->processRestRequest('GET', '/courses/$courseID/stats/$userEmail'));
     }        
     
@@ -68,7 +68,7 @@ class 360LearningClient extends 360LearningClientBase {
      *  coaches : array of the coaches of the group    
      *  custom : group's additionnal info
      */
-    function getGroup($groupID = NULL) {
+    function getGroup($groupID) {
         return new DynamicResponseModel($this->processRestRequest('GET', '/groups/$groupID'));
     }  
    
@@ -79,14 +79,14 @@ class 360LearningClient extends 360LearningClientBase {
      *  - In case of success, an empty response code 204 (No Content) in accordance with RFC 7231.
      *  - In case of error, an error code.
      */
-    function deleteGroup($groupID = NULL) {
+    function deleteGroup($groupID) {
         return new DynamicResponseModel($this->processRestRequest('DELETE', '/groups/$groupID'));
     }   
     
     /**
      * Add a user to a given group.    
      */
-    function addUserToGroup($groupID = NULL, $userEmail = NULL) {
+    function addUserToGroup($groupID, $userEmail) {
         return new DynamicResponseModel($this->processRestRequest('PUT', '/groups/$groupID/users/$userEmail'));
     }
     
@@ -97,7 +97,7 @@ class 360LearningClient extends 360LearningClientBase {
      *  - In case of success, an empty response code 204 (No Content) in accordance with RFC 7231.
      *  - In case of error, an error code.
      */
-    function deleteUserFromGroup($groupID = NULL, $userEmail = NULL) {
+    function deleteUserFromGroup($groupID, $userEmail) {
         return new DynamicResponseModel($this->processRestRequest('DELETE', '/groups/$groupID/users/$userEmail'));
     }     
   
@@ -122,7 +122,7 @@ class 360LearningClient extends 360LearningClientBase {
      * Returns :
      *  A status code (group_updated, invalid argument : {name/public}) 
      */
-    function updateGroup($groupID = NULL, $name = NULL, $public = NULL, $custom = NULL) {
+    function updateGroup($groupID, $name = NULL, $public = NULL, $custom = NULL) {
         $body = array();
         $body["name"] = $matchName;
         $body["public"] = $trackOpens;
@@ -135,7 +135,7 @@ class 360LearningClient extends 360LearningClientBase {
      * "Will be available around october 17'."
      * Please note that the property programDuration returned is the estimated duration (in hours) of the program, optionnaly provided in the advanced options of the web interface.
      */
-    function getGroupPrograms($groupID = NULL) {
+    function getGroupPrograms($groupID) {
         return new DynamicResponseModel($this->processRestRequest('GET', '/groups/$groupID/programs'));
     }  
     
@@ -232,32 +232,149 @@ class 360LearningClient extends 360LearningClientBase {
     
     /**********************************************************************************************************************************
      * Users
+     */  
+    
+    /**
+     * Retrieve the list of all your users.
+     * Returns:
+     *    An array of users (_id, mail, firstName, lastName, custom)
      */
+    function getUsers() {
+        return new DynamicResponseModel($this->processRestRequest('GET', '/users'));
+    }
     
-    GET
-    getUsers
-    POST
-    inviteUser
-    POST
-    createUser with password
-    GET
-    getUser
-    PUT
-    updateUser
-    DEL
-    deleteUser
-    PUT
-    addManagerToUser
-    DEL
-    deleteManagerFromUser
-    GET
-    getUserPrograms
-    GET
-    getUserCourses
+    /**
+     * Send an invitation to a given user (who will receive an automatic invitation email). Only learners can be invited this way.
+     *Parameters description (body) :
+     *   mail : user’s mail
+     * Returns :
+     *  - A status code (invitation_created, invitation_already_exists)     
+     */
+    function inviteUser($userEmail) {
+        $body = array();
+        $body["mail"] = $userEmail;
+        return new DynamicResponseModel($this->processRestRequest('POST', '/users',$body));
+    }    
+  
+    /**
+     * Create user
+     * If the CREATE call deals with an email address which previously existed but was deactivated (cf. DELETE USER), the corresponding user is reactivated and the fields sent in the create are not taken into account.     
+     * Parameters description (body) :    
+     *  mail : user’s mail    
+     *  password : user’s password (plaintext)    
+     *  firstName : user’s first name (optional)    
+     *  lastName : user’s last name (optional)    
+     *  phone : user’s phone (optional)    
+     *  lang : user’s default language (en, fr, es, de, it, pt, nl, cn, jp or kr) (optional)    
+     *  role : learner, author or admin. This parameter is optional and set by default to learner.    
+     *  job: user’s Title/Employment (optional)    
+     *  organization: user’s organization (optional)    
+     *  custom: user’s additional information (optional)    
+     *  keywords[0]: label added with the API 0 (optional)    
+     *  keywords[1]: label added with the API 1 (optional)    
+     *  keywords[n]: label added with the API n (optional)    
+     *  notify: if the login and the password are sent to the user. This parameter is optional and set by default to false.
+     * Returns :
+     *  A status code (user_created, email_already_used)
+    */    
+    function createUser($userEmail, $password, $firstName = NULL, $lastName = NULL, $phone = NULL, $lang = NULL, $role = 'learner', $job = NULL, $organization = NULL, $custom = NULL, $keywords = NULL, $notify=false) {
+        $body = array();
+        $body["mail"] = $userEmail;
+        $body["password"] = $password;
+        $body["firstName"] = $firstName;
+        $body["lastName"] = $lastName;
+        $body["phone"] = $phone;
+        $body["lang"] = $lang;
+        $body["role"] = $role;
+        $body["job"] = $job;
+        $body["organization"] = $organization;
+        $body["custom"] = $custom;
+        $body["keywords"] = $keywords;
+        $body["notify"] = $notify;
+        return new DynamicResponseModel($this->processRestRequest('POST', '/users',$body));
+    }   
     
+    /**
+     * Retrieve basic information about a given user.
+     * Returns :
+     *    _id: user’s id
+     *    mail: user’s mail
+     *    firstName: user’s first name
+     *    lastName: user’s first name
+     *    custom: user’s additional information
+     *    managers: user’s list of managers
+     *    keywords: user’s list of labels
+     *    groups : user's list of groups
+     */
+    function getUser($userEmail) {        
+        return new DynamicResponseModel($this->processRestRequest('GET', '/users/$userEmail'));
+    }
     
+    /**
+     * Update a user. The new keyword list replaces the existing list.
+     * 
+     *  BODY        
+     *     role :  user - learner, author or admin. This parameter is optional and set by default to learner.
+     *     custom :  updated custom field - user’s additional information (optional)
+     *     keywords[]  
+     *     mail : may be a new mail
+     *
+     * Returns :
+     *  A status code ({}, mail_already_invited)
+     */
+    function updateUser($userEmail, $role, $custom, $keyword, $mail) {
+        $body = array();
+        $body["role"] = $role;
+        $body["custom"] = $custom;
+        $body["keywords"] = $keyword;
+        $body["mail"] = $mail;
+        return new DynamicResponseModel($this->processRestRequest('PUT', '/users/$userEmail', $body));
+    }  
+   
+    /**
+     * Deactivate a given user.
+     * Please note that this call does not remove the data from the database but only disables the user: the user can no longer login and is no longer counted in the license number (if user licenses apply to your contrat). This behaviour is needed for coherent statistics of training resources in the dashboard.
+     * If you create this user again (reactivation), the user will keep his programs, managers, managed users, learning statistics, labels, custom field and password but will lose his groups.
+     * Warning: From the next release (postponed to September 2017), the user will lose his managers and managed users.
+     * Returns :
+     *     In case of success, an empty response code 204 (No Content) in accordance with RFC 7231.
+     *     In case of error, an error code.
+     */
+    function deleteUser($userEmail) {
+        return new DynamicResponseModel($this->processRestRequest('DEL', '/users/$userEmail'));
+    }    
     
+    /*
+     * Assign a manager to a given user.     
+     */    
+    function addManagerToUser($userEmail, $managerEmail) {
+        return new DynamicResponseModel($this->processRestRequest('PUT', '/users/$userEmail/managers/$managerEmail'));
+    }    
+   
+    /*
+     * Unassign a manager from a given user.
+     * Returns :
+     *    In case of success, an empty response code 204 (No Content) in accordance with RFC 7231.
+     *    In case of error, an error code.
+     */
+    function addManagerToUser($userEmail, $managerEmail) {
+        return new DynamicResponseModel($this->processRestRequest('DEL', '/users/$userEmail/managers/$managerEmail'));
+    } 
     
+    /**
+     * Returns all the programs which have been assigned to the user (individually, via a group, or via open registration).     
+     */
+    function getUserPrograms($userEmailOrID) {
+        return new DynamicResponseModel($this->processRestRequest('GET', '/users/$userEmailOrID/programs'));
+    }
+    
+    /**
+     * Returns all the courses attempted by the user, with details for every attempt. 
+     */
+    function getUserCourses($userEmailOrID) {
+        return new DynamicResponseModel($this->processRestRequest('GET', '/users/$userEmailOrID/courses'));
+    }
+      
     
 }
 
