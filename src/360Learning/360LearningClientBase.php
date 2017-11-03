@@ -105,7 +105,7 @@ abstract class 360LearningClientBase {
         $options = [
             RequestOptions::HTTP_ERRORS => false,
             RequestOptions::HEADERS => [
-                'User-Agent' => "Postmark-PHP (PHP Version:{$this->version}, OS:{$this->os})",
+                'User-Agent' => "3xConsultants-360LBundle-PHP (PHP Version:{$this->version}, OS:{$this->os})",
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
                 $this->authorization_header => $this->authorization_token
@@ -141,9 +141,7 @@ abstract class 360LearningClientBase {
             case 500:
                 $ex = new 360LException();
                 $ex->httpStatusCode = 500;
-                $ex->message = 'Internal Server Error: This is an issue with Postmark’s servers processing your request. ' .
-                    'In most cases the message is lost during the process, ' .
-                    'and Postmark is notified so that we can investigate the issue.';
+                $ex->message = 'Internal Server Error: This is an issue with servers processing your request. ';
                 throw $ex;           
             default:
                 $ex = new 360LException();

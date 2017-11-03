@@ -1,0 +1,3 @@
+services:
+    kassoulet.360L.crud:
+        class: Kassoulet\360LBundle\Services\360LService

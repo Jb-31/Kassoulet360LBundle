@@ -46,6 +46,9 @@ class 360LearningClient extends 360LearningClientBase {
     }        
     
     
+    
+     
+    
     /**********************************************************************************************************************************
      * Groups
      */
@@ -373,8 +376,7 @@ class 360LearningClient extends 360LearningClientBase {
      */
     function getUserCourses($userEmailOrID) {
         return new DynamicResponseModel($this->processRestRequest('GET', '/users/$userEmailOrID/courses'));
-    }
-      
+    }      
     
 }
 
