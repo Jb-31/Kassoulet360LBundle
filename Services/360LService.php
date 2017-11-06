@@ -7,43 +7,46 @@ use Lexik\Bundle\MailerBundle\Entity\EventLogger;
 class EventLoggerService
 {
     private $em;
+    private $api;
     
     /**
      * Constructor
      */
     public function __construct(EntityManager $entityManager) {
+        //Init entityManager
         $this->em = $entityManager;
+    }     
+    
+    /**
+     * Set the 360Learning API SDK instance
+     *
+     * @param 360LClient $api
+     * @return $this
+     */
+    public function setApi(360LearningClient $api)
+    {
+        $this->api = $api;
+        return $this;
+    }
+    
+    public function updateUsers(){
+        
         
     }
     
-    public function addEvent($ref, $entities){
+    public function updateStages(){
         
-        $event = new EventLogger();
-        
-        $event->setDatetimeAdd(new \DateTime());
-        $event->setRef($ref);
-        $event->setEntitiesAffected($entities);
-        $event->setStatut(0);
-        
-        $this->em->persist($event);
-        $this->em->flush();
-    }
-    
-    //including update of datatimeHandled & statut
-    public function getEvents($ref){
-        $events =  $this->em->getRepository('LexikMailerBundle:EventLogger')->getEventsByRef($ref);
-        
-        //update datetimeHandled & statut
-        $this->em->getRepository('LexikMailerBundle:EventLogger')->HandleEvents($events);
-        
-        return $events;
         
     }
     
-    // delete events whith status = 1;
-    public function cleanEvents(){
-        $this->em->getRepository('LexikMailerBundle:EventLogger')->deleteHandledEvents();
-    }
+   
+    
+    /*
+     * Une tache cron viendra récupérer la liste des utilisateurs de 360Learning, la comparer avec les utilisateurs existants sur eleo et ajouter les manquants dans 360Learning
+     * Une autre tache cron viendra récupérer le catalogue 360Learning et ajouter les manquants dans le catalogue eleo
+     */
+    
+    
     
     
 }

@@ -35,13 +35,13 @@ class Kassoulet360LExtension extends Extension
         $loader->load('services.yml');        
         
         //Définition du service API
-        $apiServiceDefinition = new Definition('Postmark\PostmarkClient', array($config['api_key']) );        
+        $apiServiceDefinition = new Definition('360Learning\360LearningClient', $configs) );        
         $container->addDefinitions(array(
-            'kassoulet.swift_transport.postmark.api' => $apiServiceDefinition
+            'kassoulet.360Learning.api' => $apiServiceDefinition
         ));
         
         //Alias utilisé dans le fichier parameters, repris dans le fichier config
-        $container->setAlias('kassoulet_postmark', 'kassoulet.swift_transport.postmark');
+        $container->setAlias('kassoulet_360l', 'kassoulet.360Learning.api');
         
     }
     

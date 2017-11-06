@@ -39,8 +39,9 @@ abstract class 360LearningClientBase {
     
     public static $VERIFY_SSL= true;
     
+    protected $authorization_company = NULL;
     protected $authorization_token = NULL;
-    protected $authorization_header = NULL;
+    
     protected $version = NULL;
     protected $os = NULL;
     protected $timeout = 30;
@@ -48,9 +49,10 @@ abstract class 360LearningClientBase {
     /** @var  Client */
     protected $client;
     
-    protected function __construct($token, $header, $timeout = 30) {
-        $this->authorization_header = $header;
+    protected function __construct($token, $company, $timeout = 30) {        
         $this->authorization_token = $token;
+        $this->authorization_company = $company;
+        
         $this->version = phpversion();
         $this->os = PHP_OS;
         $this->timeout = $timeout;
@@ -107,8 +109,7 @@ abstract class 360LearningClientBase {
             RequestOptions::HEADERS => [
                 'User-Agent' => "3xConsultants-360LBundle-PHP (PHP Version:{$this->version}, OS:{$this->os})",
                 'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-                $this->authorization_header => $this->authorization_token
+                'Content-Type' => 'application/json'
                 ],
                 ];
         
@@ -132,6 +133,9 @@ abstract class 360LearningClientBase {
                         break;
                 }
         }
+        
+        //ADD credentials to path
+        //$path = $path."company=".$this->authorization_company."&apiKey=".$this->authorization_token;
         
         $response = $client->request($method, $path, $options);
         
