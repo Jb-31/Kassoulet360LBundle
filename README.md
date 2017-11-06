@@ -12,9 +12,9 @@ Perform the following steps to install and use the basic functionality
 
 Add Kassoulet360LBundle to your composer.json using the following construct:
 
-    $ composer require kassoulet/360LBundle
+    $ composer require kassoulet/360lBundle
 
-Composer will install the bundle to your project's ``vendor/kassoulet/360Lbundle`` directory.
+Composer will install the bundle to your project's ``vendor/kassoulet/360lbundle`` directory.
 
 ### Step 2: Enable the bundle
 
