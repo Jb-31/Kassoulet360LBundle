@@ -42,5 +42,5 @@ Add your credentials in config file : company and apiKey
 
 kassoulet_360L:
     company_id: yourCompanyID
-    api_key: yourAPIKey            
+    api_key: yourAPIKey             
 ```
