@@ -76,6 +76,12 @@ class EventLoggerService
         }
         
     }
+    
+    public function updateStagesProgress(){
+        
+        //A définir comment on gère les status des demandes, si on gère un pourcentage dans l'appli, une date, etc...        
+        
+    }
        
     
     /*

@@ -1,5 +1,5 @@
 services:
-    kassoulet.360L.crud:
+    kassoulet.360Learning.utils:
         class: Kassoulet\360LBundle\Services\360LService
         calls:  
             - [ 'setApi', ['@kassoulet.360Learning.api'] ]
