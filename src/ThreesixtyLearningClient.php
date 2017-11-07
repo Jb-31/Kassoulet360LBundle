@@ -2,7 +2,7 @@
 
 namespace Kassoulet\ThreesixtyLearningBundle;
 
-use Models\DynamicResponseModel as DynamicResponseModel;
+use Kassoulet\ThreesixtyLearningBundle\Models\DynamicResponseModel as DynamicResponseModel;
 use Kassoulet\ThreesixtyLearningBundle\ThreesixtyLearningClientBase as ThreesixtyLearningClientBase;
 
 

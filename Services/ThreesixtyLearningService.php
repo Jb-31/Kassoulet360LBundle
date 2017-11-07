@@ -23,10 +23,8 @@ class ThreesixtyLearningService
      * @param ThreesixtyLearningClient $api
      * @return $this
      */
-    public function setApi(Kassoulet\ThreesixtyLearningBundle\ThreesixtyLearningClient $api)
+    public function setApi(ThreesixtyLearningClient $api)
     {
-        print_r('init api');
-        exit;
         $this->api = $api;
         return $this;
     }
