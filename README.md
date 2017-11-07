@@ -1,4 +1,4 @@
-# KassouletthreesixtyLearningBundle
+# KassouletThreesixtyLearningBundle
 
 ## Installation
 
