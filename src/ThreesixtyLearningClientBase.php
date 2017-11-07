@@ -113,6 +113,10 @@ abstract class ThreesixtyLearningClientBase {
                 ],
                 ];
         
+        //ADD credentials
+        $body['company']=$this->companyID;
+        $body['apiKey']=$this->apiKey;               
+        
         if(!empty($body)) {
             
             $cleanParams = array_filter($body, function($value) {
@@ -132,11 +136,7 @@ abstract class ThreesixtyLearningClientBase {
                         $options[RequestOptions::JSON] = $cleanParams;
                         break;
                 }
-        }       
-        
-        //ADD credentials
-        $options['company']=$this->companyID;
-        $options['apiKey']=$this->apiKey;       
+        }        
         
         $response = $client->request($method, $path, $options);
         
