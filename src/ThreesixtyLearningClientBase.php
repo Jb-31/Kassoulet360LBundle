@@ -122,6 +122,8 @@ abstract class ThreesixtyLearningClientBase {
             $cleanParams = array_filter($body, function($value) {
                 return $value !== null;
             });
+            
+                print_r($cleanParams);
                 
                 switch ($method) {
                     case 'GET':
@@ -137,8 +139,12 @@ abstract class ThreesixtyLearningClientBase {
                         break;
                 }
         }        
+                
+        $path = '/api/v1'.$path;        
         
         $response = $client->request($method, $path, $options);
+        
+        //print_r($response->getStatusCode());
         
         switch ($response->getStatusCode()) {
             case 200:
@@ -154,6 +160,8 @@ abstract class ThreesixtyLearningClientBase {
                 $ex->httpStatusCode = $response->getStatusCode();
                 $ex->ThreesixtyLearningApiErrorCode = $body['ErrorCode'];
                 $ex->message = $body['Message'];
+                
+                print_r($body);
                 throw $ex;
         }
         
