@@ -40,7 +40,7 @@ Add your credentials in config file : company and apiKey
 ```yaml
 # app/config/config.yml
 
-kassoulet_ThreesixtyLearning:
+kassoulet_threesixty_learning:
     company_id: yourCompanyID
     api_key: yourAPIKey             
 ``` 
