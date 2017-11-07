@@ -43,4 +43,4 @@ Add your credentials in config file : company and apiKey
 kassoulet_ThreesixtyLearning:
     company_id: yourCompanyID
     api_key: yourAPIKey             
-```
+``` 
