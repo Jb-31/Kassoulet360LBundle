@@ -10,9 +10,9 @@ Perform the following steps to install and use the basic functionality
 
 ### Step 1: Download the KassouletThreesixtyLearningBundle
 
-Add KassouletThreesixtyLearningBundle to your composer.json using the following construct:
+Add KassouletThreesixtyLearningBundle to your composer.json :
 
-    $ composer require kassoulet/threesixtyLearningBundle
+    "kassoulet/threesixtyLearningBundle": "dev-master"
 
 Composer will install the bundle to your project's ``vendor/kassoulet/threesixtylearningbundle`` directory.
 
