@@ -4,17 +4,17 @@
  * Author:   3X Consultants - Jean-Baptiste ROUANET (jbrouanet@oxalia-software.com)
  */
 
-namespace 360Learning;
+namespace Kassoulet\ThreesixtyLearningBundle\ThreesixtyLearning;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
-use 360Learning\Models\360LException;
+use ThreesixtyLearning\Models\ThreesixtyLearningException;
 
 /**
  * This is the core class that interacts with the 360Learning API. All clients should
  * inherit fromt this class.
  */
-abstract class 360LearningClientBase {
+abstract class ThreesixtyLearningClientBase {
     
     /**
      * BASE_URL is "http(s)://app.360learning.com/api/v1"

@@ -1,17 +1,17 @@
 <?php
 
-namespace 360Learning;
+namespace Kassoulet\ThreesixtyLearningBundle\ThreesixtyLearning;
 
-use 360Learning\Models\DynamicResponseModel as DynamicResponseModel;
-use 360Learning\360LearningClientBase as 360LearningClientBase;
+use ThreesixtyLearning\Models\DynamicResponseModel as DynamicResponseModel;
+use ThreesixtyLearning\ThreesixtyLearningClientBase as ThreesixtyLearningClientBase;
 
 
-class 360LearningClient extends 360LearningClientBase {
+class ThreesixtyLearningClient extends ThreesixtyLearningClientBase {
     
     private $server_token = NULL;
     
     /**
-     * Create a new 360LearningClient.
+     * Create a new ThreesixtyLearningClient.
      *
      * @param string $company : Your company id (company)
      * @param string $apiKey : Your API key (apiKey)
@@ -360,7 +360,7 @@ class 360LearningClient extends 360LearningClientBase {
      *    In case of success, an empty response code 204 (No Content) in accordance with RFC 7231.
      *    In case of error, an error code.
      */
-    function addManagerToUser($userEmail, $managerEmail) {
+    function deleteManagerFromUser($userEmail, $managerEmail) {
         return new DynamicResponseModel($this->processRestRequest('DEL', '/users/$userEmail/managers/$managerEmail'));
     } 
     

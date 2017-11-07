@@ -1,5 +1,6 @@
 services:
     kassoulet.ThreesixtyLearning.utils:
         class: Kassoulet\ThreesixtyLearningBundle\Services\ThreesixtyLearningService
+        arguments: ['@doctrine.orm.entity_manager']
         calls:  
             - [ 'setApi', ['@kassoulet.ThreesixtyLearning.api'] ]

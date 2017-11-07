@@ -2,7 +2,7 @@
 namespace Kassoulet\ThreesixtyLearningBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use Lexik\Bundle\MailerBundle\Entity\EventLogger;
+use Kassoulet\ThreesixtyLearningBundle\ThreesixtyLearning\ThreesixtyLearningClient as ThreesixtyLearningClient;
 
 class ThreesixtyLearningService
 {
@@ -18,13 +18,14 @@ class ThreesixtyLearningService
     }     
     
     /**
-     * Set the 360Learning API SDK instance
+     * Set the ThreesixtyLearning API SDK instance
      *
-     * @param 360LearningClient $api
+     * @param ThreesixtyLearningClient $api
      * @return $this
      */
-    public function setApi(ThreesixtyLearningClient $api)
+    public function setApi(Kassoulet\ThreesixtyLearningBundle\ThreesixtyLearning\ThreesixtyLearningClient $api)
     {
+        print_r('init api');
         $this->api = $api;
         return $this;
     }
