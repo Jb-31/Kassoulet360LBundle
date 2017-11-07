@@ -41,7 +41,7 @@ class KassouletThreesixtyLearningExtension extends Extension
         ));
         
         //Alias utilisé dans le fichier parameters, repris dans le fichier config
-        $container->setAlias('kassoulet_threesixtylearning', 'kassoulet.ThreesixtyLearning.api');
+        $container->setAlias('kassoulet_threesixty_learning', 'kassoulet.ThreesixtyLearning.api');
         
     }
     
@@ -67,6 +67,6 @@ class KassouletThreesixtyLearningExtension extends Extension
      */    
     public function getAlias()
     {
-    	return "kassoulet_ThreesixtyLearning";
+    	return "kassoulet_threesixty_learning";
     }
 }
