@@ -35,7 +35,7 @@ class KassouletThreesixtyLearningExtension extends Extension
         $loader->load('services.yml');        
         
         //Définition du service API
-        $apiServiceDefinition = new Definition('ThreesixtyLearning\ThreesixtyLearningClient', $configs) );        
+        $apiServiceDefinition = new Definition('ThreesixtyLearning\ThreesixtyLearningClient', $configs);        
         $container->addDefinitions(array(
             'kassoulet.ThreesixtyLearning.api' => $apiServiceDefinition
         ));
