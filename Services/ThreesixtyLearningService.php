@@ -2,7 +2,7 @@
 namespace Kassoulet\ThreesixtyLearningBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use Kassoulet\ThreesixtyLearningBundle\ThreesixtyLearning\ThreesixtyLearningClient as ThreesixtyLearningClient;
+use Kassoulet\ThreesixtyLearningBundle\ThreesixtyLearningClient as ThreesixtyLearningClient;
 
 class ThreesixtyLearningService
 {
@@ -23,9 +23,10 @@ class ThreesixtyLearningService
      * @param ThreesixtyLearningClient $api
      * @return $this
      */
-    public function setApi(Kassoulet\ThreesixtyLearningBundle\ThreesixtyLearning\ThreesixtyLearningClient $api)
+    public function setApi(Kassoulet\ThreesixtyLearningBundle\ThreesixtyLearningClient $api)
     {
         print_r('init api');
+        exit;
         $this->api = $api;
         return $this;
     }

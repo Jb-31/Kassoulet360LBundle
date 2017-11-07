@@ -1,6 +1,6 @@
 <?php
 
-namespace ThreesixtyLearning\Models;
+namespace Kassoulet\ThreesixtyLearningBundle\Models;
 
 /**
  * The exception thrown when the Postmark Client recieves an error from the API.

@@ -1,5 +1,5 @@
 <?php
-namespace 360Learning\Models;
+namespace Kassoulet\ThreesixtyLearningBundle\Models;
 
 /**
  * CaseInsensitiveArray allows accessing elements with mixed-case keys.

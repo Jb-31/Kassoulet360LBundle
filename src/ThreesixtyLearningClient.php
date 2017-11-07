@@ -1,9 +1,9 @@
 <?php
 
-namespace Kassoulet\ThreesixtyLearningBundle\ThreesixtyLearning;
+namespace Kassoulet\ThreesixtyLearningBundle;
 
-use ThreesixtyLearning\Models\DynamicResponseModel as DynamicResponseModel;
-use ThreesixtyLearning\ThreesixtyLearningClientBase as ThreesixtyLearningClientBase;
+use Models\DynamicResponseModel as DynamicResponseModel;
+use Kassoulet\ThreesixtyLearningBundle\ThreesixtyLearningClientBase as ThreesixtyLearningClientBase;
 
 
 class ThreesixtyLearningClient extends ThreesixtyLearningClientBase {

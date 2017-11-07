@@ -1,5 +1,5 @@
 <?php
-namespace 360Learning\Models;
+namespace Kassoulet\ThreesixtyLearningBundle\Models;
 
 /**
  * The DynamicResponseModel class allows flexible and forgiving access to responses from the Postmark API.

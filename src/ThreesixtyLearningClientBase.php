@@ -4,11 +4,11 @@
  * Author:   3X Consultants - Jean-Baptiste ROUANET (jbrouanet@oxalia-software.com)
  */
 
-namespace Kassoulet\ThreesixtyLearningBundle\ThreesixtyLearning;
+namespace Kassoulet\ThreesixtyLearningBundle;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
-use ThreesixtyLearning\Models\ThreesixtyLearningException;
+use Models\ThreesixtyLearningException;
 
 /**
  * This is the core class that interacts with the 360Learning API. All clients should
@@ -143,15 +143,15 @@ abstract class ThreesixtyLearningClientBase {
             case 200:
                 return json_decode($response->getBody(), true);           
             case 500:
-                $ex = new 360LException();
+                $ex = new ThreesixtyLearningException();
                 $ex->httpStatusCode = 500;
                 $ex->message = 'Internal Server Error: This is an issue with servers processing your request. ';
                 throw $ex;           
             default:
-                $ex = new 360LException();
+                $ex = new ThreesixtyLearningException();
                 $body = json_decode($response->getBody(), true);
                 $ex->httpStatusCode = $response->getStatusCode();
-                $ex->360LearningApiErrorCode = $body['ErrorCode'];
+                $ex->ThreesixtyLearningApiErrorCode = $body['ErrorCode'];
                 $ex->message = $body['Message'];
                 throw $ex;
         }
