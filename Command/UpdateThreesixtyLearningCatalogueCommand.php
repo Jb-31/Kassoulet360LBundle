@@ -18,12 +18,8 @@ class UpdateThreesixtyLearningCatalogueCommand extends ContainerAwareCommand
     
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        //Récup du service ThreesixtyLearningService
-        
-        $output->writeln("0");
-        $ThreesixtyLearningService = $this->getApplication()->getKernel()->getContainer()->get('kassoulet.ThreesixtyLearning.utils');
-        
-        $output->writeln("1");
+        //Récup du service ThreesixtyLearningService        
+        $ThreesixtyLearningService = $this->getApplication()->getKernel()->getContainer()->get('kassoulet.ThreesixtyLearning.utils');        
         $ThreesixtyLearningService->updateStages();
         $output->writeln("ThreesixtyLearning : update catalogue ok");
     }

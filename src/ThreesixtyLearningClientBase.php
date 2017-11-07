@@ -8,7 +8,7 @@ namespace Kassoulet\ThreesixtyLearningBundle;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
-use Models\ThreesixtyLearningException;
+use Kassoulet\ThreesixtyLearningBundle\Models\ThreesixtyLearningException;
 
 /**
  * This is the core class that interacts with the 360Learning API. All clients should
