@@ -39,8 +39,8 @@ abstract class ThreesixtyLearningClientBase {
     
     public static $VERIFY_SSL= true;
     
-    protected $authorization_company = NULL;
-    protected $authorization_token = NULL;
+    protected $companyID = NULL;
+    protected $apiKey = NULL;
     
     protected $version = NULL;
     protected $os = NULL;
@@ -49,9 +49,9 @@ abstract class ThreesixtyLearningClientBase {
     /** @var  Client */
     protected $client;
     
-    protected function __construct($token, $company, $timeout = 30) {        
-        $this->authorization_token = $token;
-        $this->authorization_company = $company;
+    protected function __construct($serverCredentials, $timeout = 30) {        
+        $this->companyID = $serverCredentials['company_id'];
+        $this->apiKey = $serverCredentials['api_key'];
         
         $this->version = phpversion();
         $this->os = PHP_OS;
@@ -132,10 +132,11 @@ abstract class ThreesixtyLearningClientBase {
                         $options[RequestOptions::JSON] = $cleanParams;
                         break;
                 }
-        }
+        }       
         
-        //ADD credentials to path
-        //$path = $path."company=".$this->authorization_company."&apiKey=".$this->authorization_token;
+        //ADD credentials
+        $options['company']=$this->companyID;
+        $options['apiKey']=$this->apiKey;       
         
         $response = $client->request($method, $path, $options);
         

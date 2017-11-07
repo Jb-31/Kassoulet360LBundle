@@ -13,12 +13,11 @@ class ThreesixtyLearningClient extends ThreesixtyLearningClientBase {
     /**
      * Create a new ThreesixtyLearningClient.
      *
-     * @param string $company : Your company id (company)
-     * @param string $apiKey : Your API key (apiKey)
+     * @param array $serverCredentials : Your company id (company) / Your API key (apiKey)    
      * @param integer $timeout The timeout, in seconds to wait for an API call to complete before throwing an Exception.
      */
-    function __construct($serverToken, $timeout = 30) {
-        parent::__construct($serverToken, 'X-Postmark-Server-Token', $timeout);
+    function __construct($serverCredentials, $timeout = 30) {
+        parent::__construct($serverCredentials, $timeout);
     }   
     
     
