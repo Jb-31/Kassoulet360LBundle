@@ -1,5 +1,5 @@
 services:
-    kassoulet.360Learning.utils:
-        class: Kassoulet\360LBundle\Services\360LService
+    kassoulet.ThreesixtyLearningearning.utils:
+        class: Kassoulet\ThreesixtyLearningBundle\Services\ThreesixtyLearningService
         calls:  
-            - [ 'setApi', ['@kassoulet.360Learning.api'] ]
+            - [ 'setApi', ['@kassoulet.ThreesixtyLearning.api'] ]
