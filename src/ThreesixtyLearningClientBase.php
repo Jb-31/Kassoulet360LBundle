@@ -144,8 +144,6 @@ abstract class ThreesixtyLearningClientBase {
         
         $response = $client->request($method, $path, $options);
         
-        //print_r($response->getStatusCode());
-        
         switch ($response->getStatusCode()) {
             case 200:
                 return json_decode($response->getBody(), true);           
@@ -159,9 +157,7 @@ abstract class ThreesixtyLearningClientBase {
                 $body = json_decode($response->getBody(), true);
                 $ex->httpStatusCode = $response->getStatusCode();
                 $ex->ThreesixtyLearningApiErrorCode = $body['ErrorCode'];
-                $ex->message = $body['Message'];
-                
-                print_r($body);
+                $ex->message = $body['Message'];               
                 throw $ex;
         }
         
