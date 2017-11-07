@@ -1,6 +1,6 @@
 <?php
 
-namespace Kassoulet\360LBundle\DependencyInjection;
+namespace Kassoulet\ThreesixtyLearningBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('kassoulet_360L');
+        $rootNode = $treeBuilder->root('kassoulet_ThreesixtyLearning');
 
         $rootNode
             ->children()                

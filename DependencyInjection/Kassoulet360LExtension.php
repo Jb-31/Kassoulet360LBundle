@@ -1,6 +1,6 @@
 <?php
 
-namespace Kassoulet\360LBundle\DependencyInjection;
+namespace Kassoulet\ThreesixtyLearningBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -16,11 +16,11 @@ use Symfony\Component\DependencyInjection\Loader;
  */
 
 /**
- * Class Kassoulet360LExtension
+ * Class KassouletThreesixtyLearningExtension
  *
- * @package Kassoulet\360LBundle\DependencyInjection
+ * @package Kassoulet\ThreesixtyLearningBundle\DependencyInjection
  */
-class Kassoulet360LExtension extends Extension
+class KassouletThreesixtyLearningExtension extends Extension
 {
     /**
      * {@inheritdoc}
@@ -35,13 +35,13 @@ class Kassoulet360LExtension extends Extension
         $loader->load('services.yml');        
         
         //Définition du service API
-        $apiServiceDefinition = new Definition('360Learning\360LearningClient', $configs) );        
+        $apiServiceDefinition = new Definition('ThreesixtyLearning\ThreesixtyLearningClient', $configs) );        
         $container->addDefinitions(array(
-            'kassoulet.360Learning.api' => $apiServiceDefinition
+            'kassoulet.ThreesixtyLearning.api' => $apiServiceDefinition
         ));
         
         //Alias utilisé dans le fichier parameters, repris dans le fichier config
-        $container->setAlias('kassoulet_360l', 'kassoulet.360Learning.api');
+        $container->setAlias('kassoulet_threesixtylearning', 'kassoulet.ThreesixtyLearning.api');
         
     }
     
@@ -57,8 +57,8 @@ class Kassoulet360LExtension extends Extension
     	$configuration = new Configuration();
     	$config = $processor->processConfiguration($configuration, $configs);
     
-    	$container->setParameter("Kassoulet.360L.company_id", $config["company_id"]);
-    	$container->setParameter("Kassoulet.360L.api_key", $config["api_key"]);    	
+    	$container->setParameter("Kassoulet.ThreesixtyLearning.company_id", $config["company_id"]);
+    	$container->setParameter("Kassoulet.ThreesixtyLearning.api_key", $config["api_key"]);    	
     	
     }
     
@@ -67,6 +67,6 @@ class Kassoulet360LExtension extends Extension
      */    
     public function getAlias()
     {
-    	return "kassoulet_360L";
+    	return "kassoulet_ThreesixtyLearning";
     }
 }

@@ -1,14 +1,14 @@
 <?php
 
-namespace 360Learning\Models;
+namespace ThreesixtyLearning\Models;
 
 /**
  * The exception thrown when the Postmark Client recieves an error from the API.
  */
-class 360LException extends \Exception {
+class ThreesixtyLearningException extends \Exception {
 	var $message;
 	var $httpStatusCode;
-	var $360LearningApiErrorCode;
+	var $ThreesixtyLearningApiErrorCode;
 }
 
 ?>

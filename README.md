@@ -1,20 +1,20 @@
-# Kassoulet360LBundle
+# KassouletthreesixtyLearningBundle
 
 ## Installation
 
 Perform the following steps to install and use the basic functionality
 
-* Download Kassoulet360LBundle using Composer
+* Download KassouletThreesixtyLearningBundle using Composer
 * Enable the bundle
 * Configure the bundle
 
-### Step 1: Download the Kassoulet360LBundle
+### Step 1: Download the KassouletThreesixtyLearningBundle
 
-Add Kassoulet360LBundle to your composer.json using the following construct:
+Add KassouletThreesixtyLearningBundle to your composer.json using the following construct:
 
-    $ composer require kassoulet/360lBundle
+    $ composer require kassoulet/threesixtyLearningBundle
 
-Composer will install the bundle to your project's ``vendor/kassoulet/360lbundle`` directory.
+Composer will install the bundle to your project's ``vendor/kassoulet/threesixtylearningbundle`` directory.
 
 ### Step 2: Enable the bundle
 
@@ -28,7 +28,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new Kassoulet\360LBundle\Kassoulet360LBundle(),
+        new Kassoulet\ThreesixtyLearningBundle\KassouletThreesixtyLearningBundle(),
     );
 }
 ```
@@ -40,7 +40,7 @@ Add your credentials in config file : company and apiKey
 ```yaml
 # app/config/config.yml
 
-kassoulet_360L:
+kassoulet_ThreesixtyLearning:
     company_id: yourCompanyID
     api_key: yourAPIKey             
 ```

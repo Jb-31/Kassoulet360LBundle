@@ -1,5 +1,5 @@
 <?php
-namespace Kassoulet\360LBundle\Services;
+namespace Kassoulet\ThreesixtyLearningBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use Lexik\Bundle\MailerBundle\Entity\EventLogger;
@@ -23,7 +23,7 @@ class EventLoggerService
      * @param 360LearningClient $api
      * @return $this
      */
-    public function setApi(360LearningClient $api)
+    public function setApi(ThreesixtyLearningClient $api)
     {
         $this->api = $api;
         return $this;

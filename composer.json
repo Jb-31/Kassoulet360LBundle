@@ -1,9 +1,9 @@
 {
-    "name": "kassoulet/360lbundle",
+    "name": "kassoulet/threesixtylearningbundle",
     "type": "symfony-bundle",
     "description": "",
     "keywords": [],
-    "homepage": "https://github.com/Jb-31/360Lbundle",
+    "homepage": "https://github.com/Jb-31/KassouletThreesixtyLearningBundle",
     "license": "MIT",   
     "authors": [
         {
@@ -12,19 +12,19 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/Jb-31/360Lbundle/issues"
+        "issues": "https://github.com/Jb-31/KassouletThreesixtyLearningBundle/issues"
     },
     "require": {
         "php": ">=5.5.0",
         "guzzlehttp/guzzle": "~6.0",
-        "symfony/framework-bundle": "~2.6|~3.0"       
+        "symfony/framework-bundle": "~2.6|~3.0"
     },  
     "suggest": {             
     }, 
     "autoload": {
         "exclude-from-classmap": ["/Tests/"],
         "psr-4": {            
-            "Kassoulet\\360Lbundle\\": ["", "src/"]
+            "Kassoulet\\ThreesixtyLearningBundle\\": ["", "src/"]
         }
     }
 }
