@@ -8,12 +8,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class UpdateThreesixtyLearningearningUsersCommand extends ContainerAwareCommand
+class UpdateThreesixtyLearningUsersCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this  ->setName('ThreesixtyLearningearning:updateusers');
-        //php bin/console ThreesixtyLearningearning:updateusers
+        $this  ->setName('ThreesixtyLearning:updateusers');
+        //php bin/console ThreesixtyLearning:updateusers
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

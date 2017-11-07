@@ -13,7 +13,7 @@ class UpdateThreesixtyLearningCatalogueCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this  ->setName('ThreesixtyLearning:updatecatalogue');
-        //php bin/console 360Learning:updatecatalogue
+        //php bin/console ThreesixtyLearning:updatecatalogue
     }
     
     protected function execute(InputInterface $input, OutputInterface $output)

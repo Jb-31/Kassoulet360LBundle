@@ -35,7 +35,7 @@ public function registerBundles()
 
 ### Step 3: Configure the bundle
 
-Add your credentials in config file : company and apiKey
+Add your credentials in config file : CompanyID and ApiKey
 
 ```yaml
 # app/config/config.yml
