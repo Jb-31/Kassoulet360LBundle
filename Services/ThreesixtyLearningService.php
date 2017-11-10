@@ -3,6 +3,7 @@ namespace Kassoulet\ThreesixtyLearningBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use Kassoulet\ThreesixtyLearningBundle\ThreesixtyLearningClient as ThreesixtyLearningClient;
+use Osw\TrainingBundle\Entity\Training as Training;
 
 class ThreesixtyLearningService
 {
@@ -32,22 +33,23 @@ class ThreesixtyLearningService
     public function updateUsers(){
         
         //Récup liste utilisateurs 360Learning
-        $ThreesixtyLearningUsers = $this->api->getUsers();
+        $ThreesixtyLearningUsers = $this->api->getUsers();        
         
         //Création array des mails users
         $mailArrayThreesixtyLearning = array();
-        foreach($ThreesixtyLearningUsers as $key => $value){            
-            if($key == 'mail') $mailArrayThreesixtyLearning[]= $value;            
-        }
+        foreach($ThreesixtyLearningUsers as $ThreesixtyLearningUser ){ 
+            $mailArrayThreesixtyLearning[] = $ThreesixtyLearningUser['mail'];
+        }        
         
         //Récup des nouveaux utilisateurs eleo (non présents sur 360Learning)        
-        $eleoUsers =  $this->em->getRepository('OswUserBundle:User')->getNewUsersFilteredOnMail($mailArrayThreesixtyLearning);
+        $eleoUsers =  $this->em->getRepository('OswUserBundle:User')->getUsersExcludingThesesMails($mailArrayThreesixtyLearning);
+                
         
         //On parcours les nouveaux utilisateurs et on les ajoute dans 360Learning (ou on les invite???)
-        foreach($eleoUsers as $eleoUser){            
-            $this->api->inviteUser($eleoUser->getEmail());
+        //foreach($eleoUsers as $eleoUser){            
+            //$this->api->inviteUser($eleoUser->getEmail());
             //$this->api->createUser($eleoUser->getEmail(), $password, $firstName = NULL, $lastName = NULL, $phone = NULL, $lang = NULL, 'learner', $job = NULL, $organization = NULL,  NULL, NULL, $notify=false);            
-        }
+        //}
         
     }
     
@@ -58,7 +60,8 @@ class ThreesixtyLearningService
         //Récup du catalogue eleo, filtré sur les stages importés de 360Learning
         //Ajout des deux colonnes sur l'entité stage : externalImportName = "360Learning" et externalImportID="58eb5c621a92bb4fb526b2b0"
         //Cette fonction retourne un array simple des externalImportID
-        $eleoStages360 =  $this->em->getRepository('OswTrainingBundle:Training')->getTrainingsByExternalImportName('360Learning');
+        //$eleoStages360 =  $this->em->getRepository('OswTrainingBundle:Training')->getTrainingsByExternalImportName('360Learning');
+        $eleoStages360 = array(); //pour test
         
         //Boucle sur les stages 360Learning et ajout des stages qui ne sont pas déja importés        
         foreach($ThreesixtyLearningStages as $ThreesixtyLearningStage){ 

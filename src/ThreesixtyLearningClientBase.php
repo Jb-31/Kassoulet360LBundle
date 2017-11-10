@@ -121,9 +121,7 @@ abstract class ThreesixtyLearningClientBase {
             
             $cleanParams = array_filter($body, function($value) {
                 return $value !== null;
-            });
-            
-                print_r($cleanParams);
+            });            
                 
                 switch ($method) {
                     case 'GET':
